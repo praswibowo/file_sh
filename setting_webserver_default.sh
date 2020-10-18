@@ -34,9 +34,9 @@ sudo sed -ie "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /etc/p
 sudo sed -ie "s/#port = 5432/port = 5432/g" /etc/postgresql/12/main/postgresql.conf
 sudo sed -ie "s/max_connections = 100/max_connections = 1000/g" /etc/postgresql/12/main/postgresql.conf
 
-sudo sed -ie "s/local   all             all                                     peer/local   all             all                                     ident/g" /etc/postgresql/9.6/main/pg_hba.conf
-sudo sed -ie "s/host    all             all             127.0.0.1\/32            ident/host    all             all             127.0.0.1\/32            md5/g" /etc/postgresql/9.6/main/pg_hba.conf
-sudo sed -ie "/host    all             all             127.0.0.1\/32            md5/ i host    all             all             0.0.0.0\/0        md5" /etc/postgresql/9.6/main/pg_hba.conf
+sudo sed -ie "s/local   all             all                                     peer/local   all             all                                     ident/g" /etc/postgresql/12/main/pg_hba.conf
+sudo sed -ie "s/host    all             all             127.0.0.1\/32            ident/host    all             all             127.0.0.1\/32            md5/g" /etc/postgresql/12/main/pg_hba.conf
+sudo sed -ie "/host    all             all             127.0.0.1\/32            md5/ i host    all             all             0.0.0.0\/0        md5" /etc/postgresql/12/main/pg_hba.conf
 
 sudo systemctl enable postgresql
 sudo systemctl start postgresql
