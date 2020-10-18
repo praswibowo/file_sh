@@ -46,12 +46,12 @@ echo "Install Apache 2 - Tomcat 8.5.59"
 sudo apt-get install -y apache2 default-jdk
 cd /tmp
 
-curl -O https://www-us.apache.org/dist/tomcat/tomcat-8/v8.5.59/bin/apache-tomcat-8.5.59.tar.gz
+wget https://www-us.apache.org/dist/tomcat/tomcat-8/v8.5.59/bin/apache-tomcat-8.5.59.tar.gz
 
 sudo useradd -m -U -d /opt/tomcat -s /bin/false tomcat
 
 sudo mkdir /opt/tomcat
-sudo tar xzvf apache-tomcat-8*tar.gz -C /opt/tomcat --strip-components=1
+sudo tar xzvf apache-tomcat-8.5.59.tar.gz -C /opt/tomcat --strip-components=1
 
 sudo chown -R tomcat: /opt/tomcat
 sudo sh -c 'chmod +x /opt/tomcat/bin/*.sh'
