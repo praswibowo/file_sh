@@ -1,10 +1,11 @@
 # Update
-sudo apt-get update
-sudo apt-get upgrade
+sudo apt-get update -y 
+sudo apt-get upgrade -y 
+sudo apt install -y software-properties-common
 
 # Install Firewall
 echo "Install Firewall"
-sudo apt-get install firewalld
+sudo apt-get install -y firewalld
 
 sudo systemctl enable firewalld
 sudo systemctl start firewalld
@@ -23,11 +24,11 @@ sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 
 # Update the package lists:
-sudo apt-get update
+sudo apt-get update -y 
 
 # Install the latest version of PostgreSQL.
 # If you want a specific version, use 'postgresql-12' or similar instead of 'postgresql':
-sudo apt install postgresql-12 postgresql-contrib-12 postgresql-12-postgis-3-scripts
+sudo apt install -y postgresql-12 postgresql-contrib-12 postgresql-12-postgis-3-scripts
 
 sudo sed -ie "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /etc/postgresql/12/main/postgresql.conf
 sudo sed -ie "s/#port = 5432/port = 5432/g" /etc/postgresql/12/main/postgresql.conf
@@ -42,7 +43,7 @@ sudo systemctl start postgresql
 
 # Install Apache 2 - Tomcat 8.5.59
 echo "Install Apache 2 - Tomcat 8.5.59"
-sudo apt-get install apache2 default-jdk
+sudo apt-get install -y apache2 default-jdk
 cd /tmp
 
 curl -O https://www-us.apache.org/dist/tomcat/tomcat-8/v8.5.59/bin/apache-tomcat-8.5.59.tar.gz
@@ -67,9 +68,9 @@ sudo systemctl enable apache2
 sudo systemctl start tomcat
 sudo systemctl start apache2
 
-# Install Geoserver 2.18.0
+# Install Geoserver 2.18.0 (NOT FIXED)
 echo "Install Geoserver 2.18.0"
-sudo apt-get update	
+sudo apt-get update	-y 
 
 cd /tmp
 
@@ -80,3 +81,9 @@ sudo cp geoserver/geoserver.war /opt/tomcat/webapps/geoserver.war
 
 sudo systemctl restart tomcat
 sudo systemctl restart apache2
+
+wget https://raw.githubusercontent.com/praswibowo/file_sh/master/Webserver%20Ubuntu%2018.04/mapbender.conf
+sudo mv geoserver_public.conf /etc/apache2/sites-available/geoserver_public.conf
+
+sudo a2ensite geoserver_public.conf
+sudo service apache2 reload
