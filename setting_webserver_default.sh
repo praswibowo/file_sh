@@ -1,7 +1,7 @@
 # Update
 sudo apt-get update -y 
 sudo apt-get upgrade -y 
-sudo apt install -y software-properties-common
+sudo apt install -y software-properties-common unzip gzip wget
 
 # Install Firewall
 echo "Install Firewall"
